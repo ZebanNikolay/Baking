@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecipesDetailActivity"
+            android:name=".RecipeDetailActivity"
             android:label="@string/title_recipes_detail"
             android:parentActivityName=".RecipesListActivity"
             android:theme="@style/AppTheme.NoActionBar">

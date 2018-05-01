@@ -14,7 +14,7 @@ import com.udacity.zeban.baking.dummy.DummyContent;
 /**
  * A fragment representing a single Recipes detail screen.
  * This fragment is either contained in a {@link RecipesListActivity}
- * in two-pane mode (on tablets) or a {@link RecipesDetailActivity}
+ * in two-pane mode (on tablets) or a {@link RecipeDetailActivity}
  * on handsets.
  */
 public class RecipesDetailFragment extends Fragment {

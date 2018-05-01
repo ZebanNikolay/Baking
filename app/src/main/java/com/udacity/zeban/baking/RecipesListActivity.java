@@ -22,7 +22,7 @@ import java.util.List;
  * An activity representing a list of Recipe. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link RecipesDetailActivity} representing
+ * lead to a {@link RecipeDetailActivity} representing
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
@@ -72,8 +72,8 @@ public class RecipesListActivity extends AppCompatActivity {
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final ItemListActivity mParentActivity;
-        private final List<DummyContent.DummyItem> mValues;
+        private final RecipesListActivity listActivity;
+        private final List<DummyContent.DummyItem> recipes;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
@@ -84,12 +84,12 @@ public class RecipesListActivity extends AppCompatActivity {
                     arguments.putString(RecipesDetailFragment.ARG_ITEM_ID, item.id);
                     RecipesDetailFragment fragment = new RecipesDetailFragment();
                     fragment.setArguments(arguments);
-                    mParentActivity.getSupportFragmentManager().beginTransaction()
+                    listActivity.getSupportFragmentManager().beginTransaction()
                             .replace(R.id.recipes_detail_container, fragment)
                             .commit();
                 } else {
                     Context context = view.getContext();
-                    Intent intent = new Intent(context, RecipesDetailActivity.class);
+                    Intent intent = new Intent(context, RecipeDetailActivity.class);
                     intent.putExtra(RecipesDetailFragment.ARG_ITEM_ID, item.id);
 
                     context.startActivity(intent);
@@ -100,8 +100,8 @@ public class RecipesListActivity extends AppCompatActivity {
         SimpleItemRecyclerViewAdapter(RecipesListActivity parent,
                                       List<DummyContent.DummyItem> items,
                                       boolean twoPane) {
-            mValues = items;
-            mParentActivity = parent;
+            recipes = items;
+            listActivity = parent;
             mTwoPane = twoPane;
         }
 
@@ -114,16 +114,16 @@ public class RecipesListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.mIdView.setText(recipes.get(position).id);
+            holder.mContentView.setText(recipes.get(position).content);
 
-            holder.itemView.setTag(mValues.get(position));
+            holder.itemView.setTag(recipes.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
         }
 
         @Override
         public int getItemCount() {
-            return mValues.size();
+            return recipes.size();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
