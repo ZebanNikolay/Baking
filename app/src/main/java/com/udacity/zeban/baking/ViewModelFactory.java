@@ -2,6 +2,11 @@ package com.udacity.zeban.baking;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.support.annotation.NonNull;
+
+import com.udacity.zeban.baking.data.api.RecipesApi;
+import com.udacity.zeban.baking.presentation.recipes_list.RecipesListActivity;
+import com.udacity.zeban.baking.presentation.recipes_list.RecipesListViewModel;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -10,19 +15,19 @@ import javax.inject.Singleton;
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
 
+    private RecipesApi recipesApi;
+
     @Inject
-    public ViewModelFactory() {
+    public ViewModelFactory(RecipesApi recipesApi) {
         super();
+        this.recipesApi = recipesApi;
     }
 
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
-//        if (modelClass.isAssignableFrom(MainActivityViewModel.class)) {
-//            return (T) new MainActivityViewModel(movieDBGateway, favoriteMoviesRepository);
-//        } else if (modelClass.isAssignableFrom(MovieDetailsViewModel.class)) {
-//            return (T) new MovieDetailsViewModel(movieDBGateway, favoriteMoviesRepository);
-//        }
-
+        if (modelClass.isAssignableFrom(RecipesListViewModel.class)) {
+            return (T) new RecipesListViewModel(recipesApi);
+        }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
 }

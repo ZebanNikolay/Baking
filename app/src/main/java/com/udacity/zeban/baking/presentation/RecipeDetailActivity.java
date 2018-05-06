@@ -1,4 +1,4 @@
-package com.udacity.zeban.baking;
+package com.udacity.zeban.baking.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
+
+import com.udacity.zeban.baking.R;
+import com.udacity.zeban.baking.presentation.recipes_list.RecipesListActivity;
 
 /**
  * An activity representing a single Recipes detail screen. This
@@ -22,6 +25,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,8 +57,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(RecipesDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(RecipesDetailFragment.ARG_ITEM_ID));
+            arguments.putString(RecipesDetailFragment.ARG_RECIPE,
+                    getIntent().getStringExtra(RecipesDetailFragment.ARG_RECIPE));
             RecipesDetailFragment fragment = new RecipesDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

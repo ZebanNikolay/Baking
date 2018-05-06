@@ -10,13 +10,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context=".RecipesListActivity">
-
-    <!--
-    This layout is a two-pane layout for the Recipe
-    master/detail flow.
-    
-    -->
+    tools:context=".presentation.recipes_list.RecipesListActivity">
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -27,7 +21,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context="com.udacity.zeban.baking.RecipesListActivity"
+        tools:context="com.udacity.zeban.baking.presentation.recipes_list.RecipesListActivity"
         tools:listitem="@layout/recipes_list_content" />
 
     <FrameLayout

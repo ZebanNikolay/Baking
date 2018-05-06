@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.udacity.zeban.baking">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".RecipesListActivity"
+            android:name=".presentation.recipes_list.RecipesListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -20,13 +24,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecipeDetailActivity"
+            android:name=".presentation.RecipeDetailActivity"
             android:label="@string/title_recipes_detail"
-            android:parentActivityName=".RecipesListActivity"
+            android:parentActivityName=".presentation.recipes_list.RecipesListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.udacity.zeban.baking.RecipesListActivity" />
+                android:value="com.udacity.zeban.baking.presentation.recipes_list.RecipesListActivity" />
         </activity>
     </application>
 

@@ -1,19 +1,17 @@
 package com.udacity.zeban.baking;
 
-import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 
-import javax.inject.Inject;
+import com.udacity.zeban.baking.di.AppComponent;
+import com.udacity.zeban.baking.di.ContextModule;
+import com.udacity.zeban.baking.di.DaggerAppComponent;
 
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
 import timber.log.Timber;
 
-public class App extends Application implements HasActivityInjector {
+public class App extends Application {
 
-    @Inject
-    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
+    private static AppComponent appComponent;
 
     @Override
     public void onCreate() {
@@ -25,9 +23,20 @@ public class App extends Application implements HasActivityInjector {
 
     }
 
+    private AppComponent buildComponents() {
+        return DaggerAppComponent.builder()
+                .contextModule(new ContextModule(this))
+                .build();
+    }
+
     @Override
-    public AndroidInjector<Activity> activityInjector() {
-        return dispatchingAndroidInjector;
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        appComponent = buildComponents();
+    }
+
+    public static AppComponent getAppComponent() {
+        return appComponent;
     }
 
 }
