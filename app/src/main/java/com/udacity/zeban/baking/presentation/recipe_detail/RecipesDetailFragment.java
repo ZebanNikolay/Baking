@@ -1,4 +1,4 @@
-package com.udacity.zeban.baking.presentation;
+package com.udacity.zeban.baking.presentation.recipe_detail;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.udacity.zeban.baking.R;
 import com.udacity.zeban.baking.data.models.Recipe;
+import com.udacity.zeban.baking.presentation.recipe_detail.RecipeDetailActivity;
 import com.udacity.zeban.baking.presentation.recipes_list.RecipesListActivity;
 
 /**
@@ -20,23 +21,9 @@ import com.udacity.zeban.baking.presentation.recipes_list.RecipesListActivity;
  * on handsets.
  */
 public class RecipesDetailFragment extends Fragment {
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
     public static final String ARG_RECIPE = "item_id";
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
     private Recipe recipe;
-
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public RecipesDetailFragment() {
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

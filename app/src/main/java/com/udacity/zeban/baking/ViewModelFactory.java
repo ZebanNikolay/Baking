@@ -2,10 +2,8 @@ package com.udacity.zeban.baking;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
-import android.support.annotation.NonNull;
 
 import com.udacity.zeban.baking.data.api.RecipesApi;
-import com.udacity.zeban.baking.presentation.recipes_list.RecipesListActivity;
 import com.udacity.zeban.baking.presentation.recipes_list.RecipesListViewModel;
 
 import javax.inject.Inject;

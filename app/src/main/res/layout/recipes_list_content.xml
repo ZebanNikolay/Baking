@@ -8,14 +8,14 @@
             type="com.udacity.zeban.baking.data.models.Recipe"/>
         <variable
             name="listener"
-            type="android.view.View.OnClickListener"/>
+            type="com.udacity.zeban.baking.presentation.recipes_list.RecipesListRecyclerAdapter.OnRecipeClickListener"/>
     </data>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_small"
-        android:onClick="@{listener::onClick}">
+        android:onClick="@{() -> listener.onClick(recipe)}">
 
         <TextView
             android:id="@+id/id_text"

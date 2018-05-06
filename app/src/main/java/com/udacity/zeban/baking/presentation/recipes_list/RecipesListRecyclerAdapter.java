@@ -15,10 +15,10 @@ public class RecipesListRecyclerAdapter
         extends RecyclerView.Adapter<RecipesListRecyclerAdapter.ViewHolder> {
 
     private List<Recipe> recipes;
-    private final View.OnClickListener onClickListener;
+    private final OnRecipeClickListener onClickListener;
 
     RecipesListRecyclerAdapter(List<Recipe> recipes,
-                               View.OnClickListener onClickListener) {
+                               OnRecipeClickListener onClickListener) {
         this.recipes = recipes;
         this.onClickListener = onClickListener;
     }
@@ -60,5 +60,9 @@ public class RecipesListRecyclerAdapter
             binding.setRecipe(recipe);
             binding.setListener(onClickListener);
         }
+    }
+
+    public interface OnRecipeClickListener {
+        void onClick(Recipe recipe);
     }
 }

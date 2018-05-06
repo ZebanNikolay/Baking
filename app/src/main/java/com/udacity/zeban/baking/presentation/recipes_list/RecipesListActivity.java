@@ -12,10 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import com.udacity.zeban.baking.App;
 import com.udacity.zeban.baking.R;
 import com.udacity.zeban.baking.ViewModelFactory;
-import com.udacity.zeban.baking.data.models.Recipe;
 import com.udacity.zeban.baking.databinding.ActivityRecipesListBinding;
-import com.udacity.zeban.baking.presentation.RecipeDetailActivity;
-import com.udacity.zeban.baking.presentation.RecipesDetailFragment;
+import com.udacity.zeban.baking.presentation.recipe_detail.RecipeDetailActivity;
+import com.udacity.zeban.baking.presentation.recipe_detail.RecipesDetailFragment;
 
 import java.util.ArrayList;
 
@@ -59,8 +58,7 @@ public class RecipesListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        adapter = new RecipesListRecyclerAdapter(new ArrayList<>(), view -> {
-            Recipe recipe = (Recipe) view.getTag();
+        adapter = new RecipesListRecyclerAdapter(new ArrayList<>(), recipe -> {
             if (twoPane) {
                 Bundle arguments = new Bundle();
                 arguments.putParcelable(RecipesDetailFragment.ARG_RECIPE, recipe);
@@ -70,7 +68,7 @@ public class RecipesListActivity extends AppCompatActivity {
                         .replace(R.id.recipes_detail_container, fragment)
                         .commit();
             } else {
-                Context context = view.getContext();
+                Context context = RecipesListActivity.this;
                 Intent intent = new Intent(context, RecipeDetailActivity.class);
                 intent.putExtra(RecipesDetailFragment.ARG_RECIPE, recipe);
 
