@@ -31,15 +31,15 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/recipes_list_content"
-            android:visibility="@{safeUnbox(vm.loading) ? View.GONE : View.VISIBLE }"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:visibility="@{safeUnbox(vm.loading) ? View.GONE : View.VISIBLE }">
 
-        </android.support.v7.widget.RecyclerView>
+            <include layout="@layout/recipes_list" />
+        </FrameLayout>
 
         <ProgressBar
             android:layout_width="wrap_content"

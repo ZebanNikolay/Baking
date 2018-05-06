@@ -1,8 +1,6 @@
 package com.udacity.zeban.baking.presentation.recipe_detail;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,17 +9,10 @@ import android.widget.TextView;
 
 import com.udacity.zeban.baking.R;
 import com.udacity.zeban.baking.data.models.Recipe;
-import com.udacity.zeban.baking.presentation.recipe_detail.RecipeDetailActivity;
-import com.udacity.zeban.baking.presentation.recipes_list.RecipesListActivity;
 
-/**
- * A fragment representing a single Recipes detail screen.
- * This fragment is either contained in a {@link RecipesListActivity}
- * in two-pane mode (on tablets) or a {@link RecipeDetailActivity}
- * on handsets.
- */
 public class RecipesDetailFragment extends Fragment {
-    public static final String ARG_RECIPE = "item_id";
+
+    public static final String ARG_STEP = "step_key";
 
     private Recipe recipe;
 
@@ -29,17 +20,12 @@ public class RecipesDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_RECIPE)) {
+        if (getArguments().containsKey(ARG_STEP)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            recipe = getArguments().getParcelable(ARG_RECIPE);
+            recipe = getArguments().getParcelable(ARG_STEP);
 
-            Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(recipe.getName());
-            }
         }
     }
 

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.udacity.zeban.baking">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -26,8 +26,17 @@
         <activity
             android:name=".presentation.recipe_detail.RecipeDetailActivity"
             android:label="@string/title_recipes_detail"
+            android:parentActivityName=".presentation.recipe_steps_list.StepsListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.udacity.zeban.baking.presentation.recipe_steps_list.StepsListActivity" />
+        </activity>
+        <activity
+            android:name=".presentation.recipe_steps_list.StepsListActivity"
             android:parentActivityName=".presentation.recipes_list.RecipesListActivity"
             android:theme="@style/AppTheme.NoActionBar">
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.udacity.zeban.baking.presentation.recipes_list.RecipesListActivity" />

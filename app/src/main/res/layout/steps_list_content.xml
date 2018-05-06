@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="step"
+            type="com.udacity.zeban.baking.data.models.Step"/>
+        <variable
+            name="listener"
+            type="com.udacity.zeban.baking.presentation.recipe_steps_list.StepsListRecyclerAdapter.OnStepClickListener"/>
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_small"
+        android:onClick="@{() -> listener.onClick(step)}">
+
+        <TextView
+            android:id="@+id/id_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{step.shortDescription}"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/text_margin"
+            tools:text="Cookie"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+    </android.support.v7.widget.CardView>
+
+</layout>

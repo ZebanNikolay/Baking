@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.udacity.zeban.baking.App;
@@ -15,14 +16,13 @@ import com.udacity.zeban.baking.ViewModelFactory;
 import com.udacity.zeban.baking.databinding.ActivityRecipesListBinding;
 import com.udacity.zeban.baking.presentation.recipe_detail.RecipeDetailActivity;
 import com.udacity.zeban.baking.presentation.recipe_detail.RecipesDetailFragment;
+import com.udacity.zeban.baking.presentation.recipe_steps_list.StepsListActivity;
 
 import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 public class RecipesListActivity extends AppCompatActivity {
-
-    private boolean twoPane;
 
     private ActivityRecipesListBinding binding;
 
@@ -33,7 +33,6 @@ public class RecipesListActivity extends AppCompatActivity {
 
     private RecipesListRecyclerAdapter adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,38 +42,28 @@ public class RecipesListActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(RecipesListViewModel.class);
 
-        setupRecyclerView((RecyclerView) binding.frameLayout.findViewById(R.id.recipes_list));
+        setupRecyclerView(binding.recyclerView);
 
         viewModel.getMovies().observe(this, adapter::swapData);
 
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setTitle(getTitle());
 
-        if (binding.frameLayout.findViewById(R.id.recipes_detail_container) != null) {
-            twoPane = true;
-        }
-
-
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         adapter = new RecipesListRecyclerAdapter(new ArrayList<>(), recipe -> {
-            if (twoPane) {
-                Bundle arguments = new Bundle();
-                arguments.putParcelable(RecipesDetailFragment.ARG_RECIPE, recipe);
-                RecipesDetailFragment fragment = new RecipesDetailFragment();
-                fragment.setArguments(arguments);
-                this.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.recipes_detail_container, fragment)
-                        .commit();
-            } else {
-                Context context = RecipesListActivity.this;
-                Intent intent = new Intent(context, RecipeDetailActivity.class);
-                intent.putExtra(RecipesDetailFragment.ARG_RECIPE, recipe);
+            Context context = RecipesListActivity.this;
+            Intent intent = new Intent(context, StepsListActivity.class);
+            intent.putExtra(StepsListActivity.ARG_RECIPE, recipe);
 
-                context.startActivity(intent);
-            }
+            context.startActivity(intent);
         });
+        if (getResources().getBoolean(R.bool.isTablet)) {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        }
         recyclerView.setAdapter(adapter);
     }
 
