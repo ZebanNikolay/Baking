@@ -27,6 +27,10 @@ public class RecipesListViewModel extends ViewModel {
         this.recipesApi = recipesApi;
     }
 
+    public LiveData<Boolean> getLoading() {
+        return loading;
+    }
+
     public LiveData<List<Recipe>> getMovies() {
         if (recipes == null) {
             recipes = new MutableLiveData<>();

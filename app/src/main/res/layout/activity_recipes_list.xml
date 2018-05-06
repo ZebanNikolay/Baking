@@ -5,6 +5,7 @@
     tools:context=".presentation.recipes_list.RecipesListActivity">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="vm"
             type="com.udacity.zeban.baking.presentation.recipes_list.RecipesListViewModel"/>
@@ -34,10 +35,17 @@
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE }">
 
             <include layout="@layout/recipes_list" />
         </FrameLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{vm.loading ? View.VISIBLE : View.GONE }"/>
 
 
     </android.support.design.widget.CoordinatorLayout>
