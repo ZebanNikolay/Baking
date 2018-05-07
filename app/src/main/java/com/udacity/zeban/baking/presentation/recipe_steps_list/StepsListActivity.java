@@ -11,10 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import com.udacity.zeban.baking.R;
 import com.udacity.zeban.baking.data.models.Recipe;
 import com.udacity.zeban.baking.data.models.Step;
-import com.udacity.zeban.baking.databinding.ActivityRecipesListBinding;
 import com.udacity.zeban.baking.databinding.ActivityStepsListBinding;
-import com.udacity.zeban.baking.presentation.recipe_detail.RecipeDetailActivity;
-import com.udacity.zeban.baking.presentation.recipe_detail.RecipesDetailFragment;
+import com.udacity.zeban.baking.presentation.recipe_detail.StepDetailActivity;
+import com.udacity.zeban.baking.presentation.recipe_detail.StepDetailFragment;
 
 import java.util.List;
 
@@ -31,7 +30,6 @@ public class StepsListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_steps_list);
 
         if (getIntent().getParcelableExtra(ARG_RECIPE) == null) {
@@ -40,11 +38,6 @@ public class StepsListActivity extends AppCompatActivity {
 
         Recipe recipe = (Recipe) getIntent().getParcelableExtra(ARG_RECIPE);
 
-
-        if (binding.frameLayout.findViewById(R.id.recipes_detail_container) != null) {
-            twoPane = true;
-        }
-
         setupRecyclerView((RecyclerView) binding.frameLayout.findViewById(R.id.recipes_list), recipe.getSteps());
 
 
@@ -52,18 +45,18 @@ public class StepsListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView, @NonNull List<Step> steps) {
         adapter = new StepsListRecyclerAdapter(steps, step -> {
-            if (twoPane) {
+            if (getResources().getBoolean(R.bool.isTablet)) {
                 Bundle arguments = new Bundle();
-                arguments.putParcelable(RecipesDetailFragment.ARG_STEP, step);
-                RecipesDetailFragment fragment = new RecipesDetailFragment();
+                arguments.putParcelable(StepDetailFragment.ARG_STEP, step);
+                StepDetailFragment fragment = new StepDetailFragment();
                 fragment.setArguments(arguments);
                 this.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.recipes_detail_container, fragment)
+                        .replace(R.id.step_detail_container, fragment)
                         .commit();
             } else {
                 Context context = StepsListActivity.this;
-                Intent intent = new Intent(context, RecipeDetailActivity.class);
-                intent.putExtra(RecipesDetailFragment.ARG_STEP, step);
+                Intent intent = new Intent(context, StepDetailActivity.class);
+                intent.putExtra(StepDetailFragment.ARG_STEP, step);
 
                 context.startActivity(intent);
             }

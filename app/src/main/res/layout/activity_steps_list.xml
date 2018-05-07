@@ -38,7 +38,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:visibility="@{safeUnbox(vm.loading) ? View.GONE : View.VISIBLE }">
 
-            <include layout="@layout/recipes_list" />
+            <include layout="@layout/steps_list" />
         </FrameLayout>
 
         <ProgressBar

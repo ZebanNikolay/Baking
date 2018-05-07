@@ -14,8 +14,6 @@ import com.udacity.zeban.baking.App;
 import com.udacity.zeban.baking.R;
 import com.udacity.zeban.baking.ViewModelFactory;
 import com.udacity.zeban.baking.databinding.ActivityRecipesListBinding;
-import com.udacity.zeban.baking.presentation.recipe_detail.RecipeDetailActivity;
-import com.udacity.zeban.baking.presentation.recipe_detail.RecipesDetailFragment;
 import com.udacity.zeban.baking.presentation.recipe_steps_list.StepsListActivity;
 
 import java.util.ArrayList;

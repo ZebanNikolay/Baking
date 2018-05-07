@@ -1,6 +1,6 @@
 package com.udacity.zeban.baking.di;
 
-import com.udacity.zeban.baking.presentation.recipe_detail.RecipeDetailActivity;
+import com.udacity.zeban.baking.presentation.recipe_steps_list.StepsListActivity;
 import com.udacity.zeban.baking.presentation.recipes_list.RecipesListActivity;
 
 import javax.inject.Singleton;
@@ -16,6 +16,6 @@ import dagger.Component;
 public interface AppComponent {
 
     void inject(RecipesListActivity recipesListActivity);
-    void inject(RecipeDetailActivity recipeDetailActivity);
+    void inject(StepsListActivity stepsListActivity);
 
 }
