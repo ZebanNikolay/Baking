@@ -5,17 +5,16 @@
     tools:context=".presentation.recipes_list.RecipesListActivity">
 
     <data>
-        <import type="android.view.View"/>
         <variable
-            name="vm"
-            type="com.udacity.zeban.baking.presentation.recipes_list.RecipesListViewModel"/>
+            name="recipe"
+            type="com.udacity.zeban.baking.data.models.Recipe"/>
 
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"
@@ -31,23 +30,29 @@
 
         </android.support.design.widget.AppBarLayout>
 
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_small"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_small"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:text="@{recipe.getIngredientsText()}"
+                tools:text="@tools:sample/lorem/random"/>
+        </android.support.v7.widget.CardView>
+
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:visibility="@{safeUnbox(vm.loading) ? View.GONE : View.VISIBLE }">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <include layout="@layout/steps_list" />
         </FrameLayout>
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="@{safeUnbox(vm.loading) ? View.VISIBLE : View.GONE }"/>
-
-
-    </android.support.design.widget.CoordinatorLayout>
+    </LinearLayout>
 
 </layout>

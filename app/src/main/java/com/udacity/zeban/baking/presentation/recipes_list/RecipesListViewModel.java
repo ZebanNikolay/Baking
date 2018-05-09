@@ -31,7 +31,7 @@ public class RecipesListViewModel extends ViewModel {
         return loading;
     }
 
-    public LiveData<List<Recipe>> getMovies() {
+    public LiveData<List<Recipe>> getRecipes() {
         if (recipes == null) {
             recipes = new MutableLiveData<>();
             recipes.postValue(new ArrayList<>());

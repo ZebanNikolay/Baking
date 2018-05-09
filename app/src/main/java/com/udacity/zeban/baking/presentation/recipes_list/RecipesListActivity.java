@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.udacity.zeban.baking.App;
 import com.udacity.zeban.baking.R;
-import com.udacity.zeban.baking.ViewModelFactory;
 import com.udacity.zeban.baking.databinding.ActivityRecipesListBinding;
 import com.udacity.zeban.baking.presentation.recipe_steps_list.StepsListActivity;
 
@@ -42,7 +41,7 @@ public class RecipesListActivity extends AppCompatActivity {
 
         setupRecyclerView(binding.recyclerView);
 
-        viewModel.getMovies().observe(this, adapter::swapData);
+        viewModel.getRecipes().observe(this, adapter::swapData);
 
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setTitle(getTitle());

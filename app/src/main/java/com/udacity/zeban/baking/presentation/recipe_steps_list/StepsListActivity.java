@@ -38,6 +38,8 @@ public class StepsListActivity extends AppCompatActivity {
 
         Recipe recipe = (Recipe) getIntent().getParcelableExtra(ARG_RECIPE);
 
+        binding.setRecipe(recipe);
+
         setupRecyclerView((RecyclerView) binding.frameLayout.findViewById(R.id.recipes_list), recipe.getSteps());
 
 

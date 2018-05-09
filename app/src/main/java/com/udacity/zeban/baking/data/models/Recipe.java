@@ -2,11 +2,14 @@ package com.udacity.zeban.baking.data.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observable;
 
 public class Recipe implements Parcelable {
 
@@ -60,6 +63,14 @@ public class Recipe implements Parcelable {
 		return ingredients;
 	}
 
+	public String getIngredientsText(){
+	    List<String> result = new ArrayList<>();
+        for (Ingredient ingredient : ingredients) {
+            result.add(ingredient.getIngredient());
+        }
+		return TextUtils.join(",\n", result);
+	}
+
 	public void setId(int id){
 		this.id = id;
 	}
@@ -78,14 +89,14 @@ public class Recipe implements Parcelable {
 
 	@Override
  	public String toString(){
-		return 
-			"Recipe{" + 
-			"image = '" + image + '\'' + 
-			",servings = '" + servings + '\'' + 
-			",name = '" + name + '\'' + 
-			",ingredients = '" + ingredients + '\'' + 
-			",id = '" + id + '\'' + 
-			",steps = '" + steps + '\'' + 
+		return
+			"Recipe{" +
+			"image = '" + image + '\'' +
+			",servings = '" + servings + '\'' +
+			",name = '" + name + '\'' +
+			",ingredients = '" + ingredients + '\'' +
+			",id = '" + id + '\'' +
+			",steps = '" + steps + '\'' +
 			"}";
 		}
 

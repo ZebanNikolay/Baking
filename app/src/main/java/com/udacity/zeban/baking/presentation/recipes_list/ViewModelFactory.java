@@ -1,4 +1,4 @@
-package com.udacity.zeban.baking;
+package com.udacity.zeban.baking.presentation.recipes_list;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
