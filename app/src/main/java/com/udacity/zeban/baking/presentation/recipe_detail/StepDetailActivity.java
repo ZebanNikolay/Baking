@@ -19,8 +19,8 @@ public class StepDetailActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             Bundle arguments = new Bundle();
-            arguments.putString(StepDetailFragment.ARG_STEP,
-                    getIntent().getStringExtra(StepDetailFragment.ARG_STEP));
+            arguments.putParcelable(StepDetailFragment.ARG_STEP,
+                    getIntent().getParcelableExtra(StepDetailFragment.ARG_STEP));
             StepDetailFragment fragment = new StepDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

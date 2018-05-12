@@ -1,24 +1,22 @@
 package com.udacity.zeban.baking.presentation.recipe_detail;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.databinding.ObservableBoolean;
+import android.databinding.ObservableField;
+import android.databinding.ObservableLong;
 
 import com.udacity.zeban.baking.data.models.Step;
 
 public class StepDetailViewModel extends ViewModel {
 
-    private MutableLiveData<Step> step;
+    public ObservableField<Step> step = new ObservableField<>();
 
-    private MutableLiveData<Boolean> loading = new MutableLiveData<>();
+    public ObservableLong playerPosition = new ObservableLong();
+
+    public ObservableBoolean loading = new ObservableBoolean();
 
     public StepDetailViewModel(Step step) {
-        this.step = new MutableLiveData<>();
-        this.step.setValue(step);
-    }
-
-    public LiveData<Boolean> getLoading() {
-        return loading;
+        this.step.set(step);
     }
 
 }
