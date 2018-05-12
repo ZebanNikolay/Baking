@@ -1,6 +1,7 @@
 package com.udacity.zeban.baking.presentation.recipe_detail;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.res.Configuration;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -91,6 +93,13 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
         }
     }
 
+    @BindingAdapter("layout_height")
+    public static void setLayoutHeight(View view, boolean orientationLandscape) {
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.height = orientationLandscape ? RelativeLayout.LayoutParams.MATCH_PARENT : 600;
+        view.setLayoutParams(layoutParams);
+    }
+
     private void initMediaSession() {
         mediaSession = new MediaSessionCompat(getContext(), StepDetailFragment.class.getSimpleName());
         mediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS |
@@ -167,10 +176,10 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
 
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-        if((playbackState == Player.STATE_READY) && playWhenReady){
+        if ((playbackState == Player.STATE_READY) && playWhenReady) {
             stateBuilder.setState(PlaybackStateCompat.STATE_PLAYING,
                     exoPlayer.getCurrentPosition(), 1f);
-        } else if((playbackState == Player.STATE_READY)){
+        } else if ((playbackState == Player.STATE_READY)) {
             stateBuilder.setState(PlaybackStateCompat.STATE_PAUSED,
                     exoPlayer.getCurrentPosition(), 1f);
         }
@@ -212,6 +221,7 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
         super.onResume();
         String url = viewModel.step.get().getVideoURL();
         if (url != null && !url.isEmpty()) {
+            viewModel.orientationLandscape.set(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
             initMediaSession();
             initExoPlayer(Uri.parse(viewModel.step.get().getVideoURL()));
         }
