@@ -33,7 +33,7 @@
             android:layout_height="0dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/navigation"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/step_video">
 
                 <android.support.v7.widget.CardView
@@ -71,19 +71,5 @@
                 </android.support.v7.widget.CardView>
         </ScrollView>
 
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/colorPrimary"
-            android:visibility="@{vm.orientationLandscape ? View.GONE : View.VISIBLE}"
-            app:itemIconTint="@android:color/white"
-            app:itemTextColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scroll"
-            app:menu="@menu/bottom_navigation" />
     </android.support.constraint.ConstraintLayout>
 </layout>
