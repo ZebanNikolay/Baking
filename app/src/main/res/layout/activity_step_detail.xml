@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <FrameLayout
-        android:id="@+id/step_detail_container"
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="orientationLandscape"
+            type="boolean" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerInside" />
+        android:orientation="vertical">
 
+        <include
+            android:id="@+id/toolbar_layout"
+            layout="@layout/toolbar"
+            android:visibility="@{orientationLandscape ? View.GONE : View.VISIBLE}" />
+
+        <FrameLayout
+            android:id="@+id/step_detail_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside" />
+    </LinearLayout>
 </layout>

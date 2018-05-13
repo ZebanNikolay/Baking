@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.udacity.zeban.baking.R;
 import com.udacity.zeban.baking.data.models.Recipe;
@@ -42,6 +43,11 @@ public class StepsListActivity extends AppCompatActivity {
 
         setupRecyclerView((RecyclerView) binding.frameLayout.findViewById(R.id.recipes_list), recipe.getSteps());
 
+        Toolbar toolbar = (Toolbar) binding.toolbarLayout.findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle(getTitle());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     }
 
@@ -64,6 +70,12 @@ public class StepsListActivity extends AppCompatActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 }

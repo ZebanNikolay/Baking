@@ -12,11 +12,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".presentation.recipes_list.RecipesListActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,22 +24,9 @@
         </activity>
         <activity
             android:name=".presentation.recipe_detail.StepDetailActivity"
-            android:label="@string/title_recipes_detail"
-            android:parentActivityName=".presentation.recipe_steps_list.StepsListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.udacity.zeban.baking.presentation.recipe_steps_list.StepsListActivity" />
-        </activity>
+            android:label="@string/title_recipes_detail"/>
         <activity
-            android:name=".presentation.recipe_steps_list.StepsListActivity"
-            android:parentActivityName=".presentation.recipes_list.RecipesListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.udacity.zeban.baking.presentation.recipes_list.RecipesListActivity" />
-        </activity>
+            android:name=".presentation.recipe_steps_list.StepsListActivity"/>
     </application>
 
 </manifest>

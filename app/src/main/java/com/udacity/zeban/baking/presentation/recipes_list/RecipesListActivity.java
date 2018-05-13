@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.udacity.zeban.baking.App;
 import com.udacity.zeban.baking.R;
@@ -43,8 +44,9 @@ public class RecipesListActivity extends AppCompatActivity {
 
         viewModel.getRecipes().observe(this, adapter::swapData);
 
-        setSupportActionBar(binding.toolbar);
-        binding.toolbar.setTitle(getTitle());
+        Toolbar toolbar = (Toolbar) binding.toolbarLayout.findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle(getTitle());
 
     }
 
