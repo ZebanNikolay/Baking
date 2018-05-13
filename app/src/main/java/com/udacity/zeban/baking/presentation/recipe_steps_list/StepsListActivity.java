@@ -22,8 +22,6 @@ public class StepsListActivity extends AppCompatActivity {
 
     public static final String ARG_RECIPE = "recipe_key";
 
-    private boolean twoPane;
-
     private ActivityStepsListBinding binding;
 
     private StepsListRecyclerAdapter adapter;
@@ -41,7 +39,7 @@ public class StepsListActivity extends AppCompatActivity {
 
         binding.setRecipe(recipe);
 
-        setupRecyclerView((RecyclerView) binding.frameLayout.findViewById(R.id.recipes_list), recipe.getSteps());
+        setupRecyclerView((RecyclerView) binding.frameLayout.findViewById(R.id.steps_list), recipe.getSteps());
 
         Toolbar toolbar = (Toolbar) binding.toolbarLayout.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,12 +68,6 @@ public class StepsListActivity extends AppCompatActivity {
             }
         });
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 
 }

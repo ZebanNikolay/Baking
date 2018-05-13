@@ -22,11 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.recipe_steps_list.StepsListActivity"/>
         <activity
             android:name=".presentation.recipe_detail.StepDetailActivity"
             android:label="@string/title_recipes_detail"/>
-        <activity
-            android:name=".presentation.recipe_steps_list.StepsListActivity"/>
     </application>
 
 </manifest>
