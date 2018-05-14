@@ -70,4 +70,10 @@ public class StepsListActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 }

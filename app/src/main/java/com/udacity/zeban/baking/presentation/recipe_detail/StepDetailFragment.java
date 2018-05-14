@@ -221,7 +221,10 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
         super.onResume();
         String url = viewModel.step.get().getVideoURL();
         if (url != null && !url.isEmpty()) {
-            viewModel.orientationLandscape.set(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
+            viewModel.orientationLandscape.set(
+                    getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE
+                            && !getResources().getBoolean(R.bool.isTablet)
+            );
             initMediaSession();
             initExoPlayer(Uri.parse(viewModel.step.get().getVideoURL()));
         }

@@ -1,6 +1,8 @@
 package com.udacity.zeban.baking.presentation.recipes_list;
 
+import android.appwidget.AppWidgetManager;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -13,7 +15,9 @@ import android.support.v7.widget.Toolbar;
 
 import com.udacity.zeban.baking.App;
 import com.udacity.zeban.baking.R;
+import com.udacity.zeban.baking.data.models.Recipe;
 import com.udacity.zeban.baking.databinding.ActivityRecipesListBinding;
+import com.udacity.zeban.baking.presentation.BakingWidget;
 import com.udacity.zeban.baking.presentation.recipe_steps_list.StepsListActivity;
 
 import java.util.ArrayList;
@@ -53,9 +57,11 @@ public class RecipesListActivity extends AppCompatActivity {
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         adapter = new RecipesListRecyclerAdapter(new ArrayList<>(), recipe -> {
             Context context = RecipesListActivity.this;
+
+            updateBakingWidget(recipe, context);
+
             Intent intent = new Intent(context, StepsListActivity.class);
             intent.putExtra(StepsListActivity.ARG_RECIPE, recipe);
-
             context.startActivity(intent);
         });
         if (getResources().getBoolean(R.bool.isTablet)) {
@@ -64,6 +70,12 @@ public class RecipesListActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         }
         recyclerView.setAdapter(adapter);
+    }
+
+    private void updateBakingWidget(Recipe recipe, Context context) {
+        AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
+        int[] appWidgetIds = widgetManager.getAppWidgetIds(new ComponentName(this, BakingWidget.class));
+        BakingWidget.updateBakingWidgets(context, widgetManager, appWidgetIds, recipe);
     }
 
 }

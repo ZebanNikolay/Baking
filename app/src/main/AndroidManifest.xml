@@ -22,10 +22,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.recipe_steps_list.StepsListActivity"/>
+        <activity android:name=".presentation.recipe_steps_list.StepsListActivity" />
         <activity
             android:name=".presentation.recipe_detail.StepDetailActivity"
-            android:label="@string/title_recipes_detail"/>
+            android:label="@string/title_recipes_detail" />
+
+        <receiver android:name=".presentation.BakingWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/baking_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
