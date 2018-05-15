@@ -37,9 +37,11 @@ public class StepsListActivity extends AppCompatActivity {
 
         Recipe recipe = (Recipe) getIntent().getParcelableExtra(ARG_RECIPE);
 
-        binding.setRecipe(recipe);
+        if (getResources().getBoolean(R.bool.isTablet)) {
+            initStepDetailFragment(recipe.getSteps().get(0));
+        }
 
-        setupRecyclerView((RecyclerView) binding.frameLayout.findViewById(R.id.steps_list), recipe.getSteps());
+        setupRecyclerView((RecyclerView) binding.frameLayout.findViewById(R.id.steps_list), recipe);
 
         Toolbar toolbar = (Toolbar) binding.toolbarLayout.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,16 +51,10 @@ public class StepsListActivity extends AppCompatActivity {
 
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView, @NonNull List<Step> steps) {
-        adapter = new StepsListRecyclerAdapter(steps, step -> {
+    private void setupRecyclerView(@NonNull RecyclerView recyclerView, @NonNull Recipe recipe) {
+        adapter = new StepsListRecyclerAdapter(recipe, step -> {
             if (getResources().getBoolean(R.bool.isTablet)) {
-                Bundle arguments = new Bundle();
-                arguments.putParcelable(StepDetailFragment.ARG_STEP, step);
-                StepDetailFragment fragment = new StepDetailFragment();
-                fragment.setArguments(arguments);
-                this.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.step_detail_container, fragment)
-                        .commit();
+                initStepDetailFragment(step);
             } else {
                 Context context = StepsListActivity.this;
                 Intent intent = new Intent(context, StepDetailActivity.class);
@@ -68,6 +64,16 @@ public class StepsListActivity extends AppCompatActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+    }
+
+    private void initStepDetailFragment(Step step) {
+        Bundle arguments = new Bundle();
+        arguments.putParcelable(StepDetailFragment.ARG_STEP, step);
+        StepDetailFragment fragment = new StepDetailFragment();
+        fragment.setArguments(arguments);
+        this.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.step_detail_container, fragment)
+                .commit();
     }
 
     @Override

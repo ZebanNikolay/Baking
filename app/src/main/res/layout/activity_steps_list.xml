@@ -4,13 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.recipes_list.RecipesListActivity">
 
-    <data>
-        <variable
-            name="recipe"
-            type="com.udacity.zeban.baking.data.models.Recipe"/>
-
-    </data>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,20 +11,6 @@
 
         <include layout="@layout/toolbar"
             android:id="@+id/toolbar_layout"/>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_small"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_small"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:text="@{recipe.getIngredientsText()}"
-                tools:text="@tools:sample/lorem[30]"/>
-        </android.support.v7.widget.CardView>
 
         <FrameLayout
             android:id="@+id/frameLayout"
