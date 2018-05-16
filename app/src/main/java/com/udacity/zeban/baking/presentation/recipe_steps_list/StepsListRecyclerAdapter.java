@@ -75,7 +75,7 @@ public class StepsListRecyclerAdapter
             }
             case VIEW_TYPE_STEP: {
                 StepViewHolder viewHolder = (StepViewHolder) holder;
-                viewHolder.bind(steps.get(position));
+                viewHolder.bind(steps.get(position - 1));
                 break;
             }
             default:
@@ -85,7 +85,7 @@ public class StepsListRecyclerAdapter
 
     @Override
     public int getItemCount() {
-        return steps.size();
+        return steps.size() + 1;
     }
 
     class StepViewHolder extends RecyclerView.ViewHolder {
