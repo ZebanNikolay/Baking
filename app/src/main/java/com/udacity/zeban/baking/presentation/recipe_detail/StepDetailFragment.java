@@ -6,6 +6,7 @@ import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
@@ -39,6 +40,8 @@ import com.udacity.zeban.baking.databinding.FragmentStepDetailBinding;
 public class StepDetailFragment extends Fragment implements Player.EventListener {
 
     public static final String ARG_STEP = "step_key";
+    private static final String INSTANCE_STATE_PLAYER_POSITION = "player_position";
+    private static final String INSTANCE_STATE_PLAYER_STATE = "player_state";
 
     private Step step;
 
@@ -48,6 +51,8 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
     private MediaSessionCompat mediaSession;
     private PlaybackStateCompat.Builder stateBuilder;
 
+    private long playerPosition;
+    private boolean playState;
 
     private StepDetailViewModel viewModel;
 
@@ -55,6 +60,11 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_step_detail, container, false);
+
+        if (savedInstanceState != null) {
+            playerPosition = savedInstanceState.getLong(INSTANCE_STATE_PLAYER_POSITION);
+            playState = savedInstanceState.getBoolean(INSTANCE_STATE_PLAYER_STATE);
+        }
 
         initArguments();
 
@@ -141,14 +151,15 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
             MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                     getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
             exoPlayer.prepare(mediaSource);
-            exoPlayer.setPlayWhenReady(true);
-            exoPlayer.seekTo(viewModel.playerPosition.get());
+            exoPlayer.setPlayWhenReady(playState);
+            exoPlayer.seekTo(playerPosition);
         }
     }
 
     private void releasePlayer() {
         if (exoPlayer != null) {
-            viewModel.playerPosition.set(exoPlayer.getCurrentPosition());
+            playerPosition = exoPlayer.getCurrentPosition();
+            playState = exoPlayer.getPlayWhenReady();
             exoPlayer.stop();
             exoPlayer.release();
             exoPlayer = null;
@@ -231,8 +242,17 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onPause() {
+        super.onPause();
         releasePlayer();
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong(INSTANCE_STATE_PLAYER_POSITION, playerPosition);
+        outState.putBoolean(INSTANCE_STATE_PLAYER_STATE, playState);
+
+    }
+
 }

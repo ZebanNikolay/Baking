@@ -11,8 +11,6 @@ public class StepDetailViewModel extends ViewModel {
 
     public ObservableField<Step> step = new ObservableField<>();
 
-    public ObservableLong playerPosition = new ObservableLong();
-
     public ObservableBoolean orientationLandscape = new ObservableBoolean();
 
     public StepDetailViewModel(Step step) {
